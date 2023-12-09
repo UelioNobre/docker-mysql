@@ -1,4 +1,4 @@
-# PSel Acelera Trybe
+# DOCKER MYSQL EXPRESS
 
 Com a chegada do OpenBanking no Brasil as transações bancárias passaram a ser menos burocráticas, permitindo que qualquer empresa possa realizar transações através de qualquer instituição financeira que utiliza o OpenBanking.
 
@@ -7,12 +7,12 @@ Uma loja virtual conhecida nacionalmente estava fazendo seu balanço de caixa, e
 A empresa trabalha com a ideia de cashback em vendas realizadas para fidelizar clientes. Para cada pagamento recebido existe a possibilidade de gerar uma taxa variável em percentuais de cashback, a depender do(a) cliente. 
 Você foi contratado para criar um dos módulos do sistema. Esse módulo será acessado apenas pelos outros módulos do sistema da empresa, ou seja, todas as requisições que a API receber, serão de origem dos outros módulos. 
 
-# Back-end
+## Back-end
 
 O módulo que você irá criar, deverá ser uma aplicação REST capaz de:
 
 
-## Fluxo Conta:
+### Fluxo Conta:
 
 1. Criar uma conta
 -  A conta deve ter, pelo menos, os campos CPF ou CNPJ, name, email, password e status da conta;
@@ -27,7 +27,7 @@ O módulo que você irá criar, deverá ser uma aplicação REST capaz de:
 - O delete deve ser lógico, isto é, o status da conta deve ser colocado em inativo.
 - Apenas é permitido deletar a conta por acessos autenticados
 
-## Fluxo transações:
+### Fluxo transações:
 
 4. Registrar pagamento
 - Apenas é permitido registrar pagamento por acessos autenticados
@@ -63,7 +63,7 @@ O módulo que você irá criar, deverá ser uma aplicação REST capaz de:
 ]
 ```
 
-# Front-end
+### Front-end
 
 Para interagir com a API REST, será necessário criar, pelo menos, as seguintes telas:
 
@@ -90,7 +90,7 @@ Para interagir com a API REST, será necessário criar, pelo menos, as seguintes
 5. Um menu de navegação a todas as telas, com nome e CPF da pessoa logada.
 
 
-## O que será avaliado
+#### O que será avaliado
 - Documentação
 - Código limpo e organizado (nomenclatura, etc)
 - Conhecimento de padrões (design patterns, SOLID)
@@ -99,9 +99,61 @@ Para interagir com a API REST, será necessário criar, pelo menos, as seguintes
 - Segurança
 - Cobertura de testes
 
-## Diferencial
+#### Diferencial
 - Uso de Docker
 - Testes de integração
 - Testes unitários
 - Uso de Design Patterns
 - Documentação
+
+
+## Execução da aplicação
+### Docker
+Abra o daemon do Docker, execute o seguinte comando para subir o banco de dados.
+
+```bash
+$ docker-compose up -d
+```
+
+
+### Migrations
+Na raiz do projeto, execute o seguinte comando para criar as tabelas do banco de dados
+
+```bash
+# Cria as tabelas no banco
+$ npx sequelize-cli db:migrate
+
+# Reverte para a última migration
+# npx sequelize-cli db:migrate:undo
+
+# Reverte todas as migrations
+# npx sequelize-cli db:migrate:undo:all
+
+# Reverte uma migration específica
+# npx sequelize-cli db:migrate:undo:all --to "create-posts.js" 
+```
+
+ou execute pelo NPM:
+
+```
+$ npm run db:migrate
+```
+
+### Seeds
+
+Comandos para popular as tabelas
+
+```bash
+$ npx sequelize-cli db:seed:all
+
+# Reverte todos os seeds
+#npx sequelize-cli db:seed:undo:all
+
+# Reverte uma seed especifica
+#npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data
+```
+
+Ou execute pelo NPM:
+```bash
+$ npm run db:seed
+```
