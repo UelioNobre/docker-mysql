@@ -1,5 +1,65 @@
 # DOCKER MYSQL EXPRESS
 
+
+
+
+## Execução da aplicação
+### Docker
+Abra o daemon do Docker, execute o seguinte comando para subir o banco de dados.
+
+```bash
+$ docker-compose up -d
+```
+
+
+### Migrations
+Na raiz do projeto, execute o seguinte comando para criar as tabelas do banco de dados
+
+```bash
+# Cria as tabelas no banco
+$ npx sequelize-cli db:migrate
+
+# Reverte para a última migration
+# npx sequelize-cli db:migrate:undo
+
+# Reverte todas as migrations
+# npx sequelize-cli db:migrate:undo:all
+
+# Reverte uma migration específica
+# npx sequelize-cli db:migrate:undo:all --to "create-posts.js" 
+```
+
+ou execute pelo NPM:
+
+```
+$ npm run db:migrate
+```
+
+### Seeds
+
+Comandos para popular as tabelas
+
+```bash
+$ npx sequelize-cli db:seed:all
+
+# Reverte todos os seeds
+#npx sequelize-cli db:seed:undo:all
+
+# Reverte uma seed especifica
+#npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data
+```
+
+Ou execute pelo NPM:
+```bash
+$ npm run db:seed
+```
+
+
+
+---
+## Outras informações
+<details>
+<summary>Rumo a aplicação...</summary>
 Com a chegada do OpenBanking no Brasil as transações bancárias passaram a ser menos burocráticas, permitindo que qualquer empresa possa realizar transações através de qualquer instituição financeira que utiliza o OpenBanking.
 
 Uma loja virtual conhecida nacionalmente estava fazendo seu balanço de caixa, e percebeu que tem um alto custo com sistemas pagos de terceiros para realizar transações bancárias. Para tanto, decidiu criar seu próprio sistema de transações a fim de diminuir esse custo.
@@ -106,54 +166,28 @@ Para interagir com a API REST, será necessário criar, pelo menos, as seguintes
 - Uso de Design Patterns
 - Documentação
 
+</details>
 
-## Execução da aplicação
-### Docker
-Abra o daemon do Docker, execute o seguinte comando para subir o banco de dados.
+---
 
-```bash
-$ docker-compose up -d
-```
+## Checklist
+
+### Usuários
+- [ ] Create - Cria um novo usuário
+- [ ] Read - Lê um usuário pelo id
+- [ ] Update - Atualiza informações de um usuário
+- [ ] Delete - Exclui um usuário
 
 
-### Migrations
-Na raiz do projeto, execute o seguinte comando para criar as tabelas do banco de dados
+### Seguranca - JWT
+- [ ] Instalação da biblioteca jsonwebtoken
+- [ ] Criação de arquivo com funções básicas de manipulação de tokens
+- [ ] Rota de login de usuários
+- [ ] Middleware de autenticação
+- [ ] Middleware de erro da aplicação
 
-```bash
-# Cria as tabelas no banco
-$ npx sequelize-cli db:migrate
 
-# Reverte para a última migration
-# npx sequelize-cli db:migrate:undo
-
-# Reverte todas as migrations
-# npx sequelize-cli db:migrate:undo:all
-
-# Reverte uma migration específica
-# npx sequelize-cli db:migrate:undo:all --to "create-posts.js" 
-```
-
-ou execute pelo NPM:
-
-```
-$ npm run db:migrate
-```
-
-### Seeds
-
-Comandos para popular as tabelas
-
-```bash
-$ npx sequelize-cli db:seed:all
-
-# Reverte todos os seeds
-#npx sequelize-cli db:seed:undo:all
-
-# Reverte uma seed especifica
-#npx sequelize-cli db:seed:undo --seed name-of-seed-as-in-data
-```
-
-Ou execute pelo NPM:
-```bash
-$ npm run db:seed
-```
+### Usuários com autenticação
+- [ ] Obter dados de usuário a partir de um token jwt válido
+- [ ] Atualizar dados de usuário a partir de um token jwt válido
+- [ ] Deletar dados de usuário a partir de um token jwt válido
