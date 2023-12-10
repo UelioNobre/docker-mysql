@@ -25,8 +25,12 @@ function getJwtConfig() {
 
 }
 
-async function sign(payload) {
-  return jwt.sign(payload, getSecretJWT(), getJwtConfig());
+function generate(payload) {
+  const token = jwt.sign(payload, getSecretJWT(), getJwtConfig());
+  return {
+    code: 200,
+    message: token
+  }
 }
 
 async function verify(payload) {
@@ -34,6 +38,6 @@ async function verify(payload) {
 }
 
 module.exports = {
-  sign,
+  generate,
   verify
 }

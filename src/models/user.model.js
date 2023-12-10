@@ -1,12 +1,12 @@
 const { User } = require('../db/models/')
+const userErrorMessages = require('../utils/errors/user.error.messages')
 
-const createNewUser = async ({ name, email, password }) => {
+async function createNewUser({ name, email, password }) {
   const { id } = await User.create({ name, email, password })
-
   return { id, name, email }
 }
 
-const readOneUser = async ({ id }) => {
+async function readOneUser({ id }) {
   const { dataValues } = await User.findByPk(id, {
     attributes: ['id', 'name', 'email', 'createdAt']
   })
@@ -14,7 +14,7 @@ const readOneUser = async ({ id }) => {
   return dataValues
 }
 
-const updateUser = async ({ id, name, email, password }) => {
+async function updateUser({ id, name, email, password }) {
   const userDB = await User.update({
     name, email, password
   }, {
@@ -24,13 +24,27 @@ const updateUser = async ({ id, name, email, password }) => {
   return userDB
 }
 
-const deleteOneUser = async ({ id }) => {
+async function deleteOneUser({ id }) {
   await User.destroy({ where: { id } })
+}
+
+async function findByEmailAndPassword(userEmail, userPassword) {
+  const where = { email: userEmail };
+  const attributes = ['id', 'name', 'email', 'password'];
+  const result = await User.findOne({ where, attributes });
+
+  if (!result || result.dataValues.password !== userPassword) {
+    throw new Error("Not found", { cause: userErrorMessages.userNotFound() });
+  }
+
+  const { id, name, email } = result.dataValues;
+  return { id, name, email };
 }
 
 module.exports = {
   createNewUser,
   readOneUser,
   updateUser,
-  deleteOneUser
-}
+  deleteOneUser,
+  findByEmailAndPassword,
+};

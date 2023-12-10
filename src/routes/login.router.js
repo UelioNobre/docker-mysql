@@ -1,8 +1,8 @@
 const Router = require('express')
 
 const router = Router()
-const usersController = require('../controllers/users.controller')
+const loginController = require('../controllers/login.controller')
 
-router.post('/', usersController.findByEmailAndPassword)
+router.post('/', loginController.signin)
 
 module.exports = router
