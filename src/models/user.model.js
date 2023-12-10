@@ -2,7 +2,7 @@ const { User } = require('../db/models/')
 const userErrorMessages = require('../utils/errors/user.error.messages')
 
 async function createNewUser({ name, email, password }) {
-  const { id } = await User.create({ name, email, password })
+  const { dataValues: { id } } = await User.create({ name, email, password })
   return { id, name, email }
 }
 
@@ -12,7 +12,7 @@ async function readOneUser({ id }) {
 
   if (!result) userErrorMessages.notFound();
 
-  return result.dataValues
+  return result.dataValues;
 }
 
 async function updateUser({ id, name, email, password }) {
