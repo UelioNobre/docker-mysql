@@ -15,13 +15,13 @@ async function readOneUser({ id }) {
 }
 
 async function updateUser({ id, name, email, password }) {
-  const userDB = await User.update({
+  await User.update({
     name, email, password
   }, {
     where: { id }
-  })
+  });
 
-  return userDB
+  return readOneUser({ id });
 }
 
 async function deleteOneUser({ id }) {
