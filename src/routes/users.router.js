@@ -1,10 +1,14 @@
 const Router = require('express')
 const router = Router()
 const usersController = require('../controllers/users.controller')
+const authMiddleware = require('../middlewares/auth.middleware')
 
-router.post('/', usersController.create)
-router.put('/:id', usersController.update)
-router.get('/:id', usersController.read)
-router.delete('/:id', usersController.destroy)
+router.post('/', usersController.create);
+
+router.use(authMiddleware.checkAuth);
+router.put('/', usersController.update)
+router.get('/', usersController.read);
+
+router.delete('/', usersController.destroy)
 
 module.exports = router
