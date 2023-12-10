@@ -6,9 +6,8 @@ const authMiddleware = require('../middlewares/auth.middleware')
 router.post('/', usersController.create);
 
 router.use(authMiddleware.checkAuth);
-router.put('/', usersController.update)
 router.get('/', usersController.read);
-
+router.put('/', usersController.update)
 router.delete('/', usersController.destroy)
 
 module.exports = router
