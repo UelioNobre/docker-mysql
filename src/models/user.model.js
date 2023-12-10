@@ -7,25 +7,29 @@ async function createNewUser({ name, email, password }) {
 }
 
 async function readOneUser({ id }) {
-  const { dataValues } = await User.findByPk(id, {
-    attributes: ['id', 'name', 'email', 'createdAt']
-  })
+  const attributes = ['id', 'name', 'email', 'createdAt'];
+  const result = await User.findByPk(id, { attributes });
 
-  return dataValues
+  if (!result) userErrorMessages.notFound();
+
+  return result.dataValues
 }
 
 async function updateUser({ id, name, email, password }) {
-  await User.update({
-    name, email, password
-  }, {
-    where: { id }
-  });
+  await readOneUser({ id });
 
-  return readOneUser({ id });
+  const where = { id }
+  await User.update(
+    { name, email, password },
+    { where }
+  );
+
+  return { id, name, email, password };
 }
 
 async function deleteOneUser({ id }) {
-  await User.destroy({ where: { id } })
+  await readOneUser({ id });
+  await User.destroy({ where: { id } });
 }
 
 async function findByEmailAndPassword(userEmail, userPassword) {
@@ -33,8 +37,12 @@ async function findByEmailAndPassword(userEmail, userPassword) {
   const attributes = ['id', 'name', 'email', 'password'];
   const result = await User.findOne({ where, attributes });
 
-  if (!result || result.dataValues.password !== userPassword) {
-    throw new Error("Not found", { cause: userErrorMessages.userNotFound() });
+  if (!result) {
+    userErrorMessages.notFound();
+  }
+
+  if (result.dataValues.password !== userPassword) {
+    userErrorMessages.wrongEmailOrPassword();
   }
 
   const { id, name, email } = result.dataValues;
