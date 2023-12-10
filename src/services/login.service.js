@@ -7,7 +7,7 @@ async function signin(userEmail, userPassword) {
     const token = tokenService.generate(user.message)
     return token
   } catch (error) {
-    next(error)
+    throw error
   }
 }
 
