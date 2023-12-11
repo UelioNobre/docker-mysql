@@ -1,34 +1,38 @@
-const userModel = require('../models/user.model')
 
-const create = async (req, res) => {
-  const { name, email, password } = req.body
-  const { id } = await userModel.createNewUser({ name, email, password })
+const userService = require('../services/user.service');
 
-  return res.status(201).json({ id, name, email })
+/**
+ * @param {import('express').Request} req - Objeto de requisição do Express
+ * @param {import('express').Response} res - Objeto de resposta do Express
+ * @param {import('express').NextFunction} next - Objeto de resposta do Express
+ */
+async function create(req, res) {
+  const { code, message } = await userService.createUser(req.body);
+
+  return res.status(code).json(message);
 }
 
 const read = async (req, res) => {
-  const { id } = req.params
-  const user = await userModel.readOneUser({ id })
-
-  return res.status(200).json(user)
+  const { id } = req.user;
+  const { code, message } = await userService.readUser({ id });
+  return res.status(code).json(message);
 };
 
 const update = async (req, res) => {
-  const { id } = req.params
-  const { name, email, password } = req.body
-  const user = await userModel.updateUser({ id, name, email, password })
+  const { id } = req.user;
+  const { name, email, password } = req.body;
+  const { code, message } = await userService.updateUser({ id, name, email, password });
 
   return res
-    .status(204)
-    .json(user)
+    .status(code)
+    .json(message)
 }
 
 const destroy = async (req, res) => {
-  const { id } = req.params
-  await userModel.deleteOneUser({ id })
+  const { id } = req.user;
+  await userService.destroyUser({ id })
 
-  return res.status(204).end()
+  return res.status(202).end()
 }
 
 module.exports = {

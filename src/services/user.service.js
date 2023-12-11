@@ -1,5 +1,39 @@
 
-const userModel = require('../models/user.model')
+const userModel = require('../models/user.model');
+
+async function createUser({ name, email, password }) {
+  const user = await userModel.createNewUser({ name, email, password });
+
+  return {
+    code: 201,
+    message: user
+  };
+}
+
+const readUser = async ({ id }) => {
+  const user = await userModel.readOneUser({ id });
+  return {
+    code: 200,
+    message: user
+  };
+};
+
+const updateUser = async ({ id, name, email, password }) => {
+  const user = await userModel.updateUser({ id, name, email, password });
+  return {
+    code: 200,
+    message: user
+  };
+}
+
+const destroyUser = async ({ id }) => {
+  await userModel.deleteOneUser({ id })
+
+  return {
+    code: 204,
+    message: 'No content.'
+  };
+}
 
 async function findByEmailAndPassword(email, password) {
   try {
@@ -14,5 +48,9 @@ async function findByEmailAndPassword(email, password) {
 }
 
 module.exports = {
-  findByEmailAndPassword
+  findByEmailAndPassword,
+  createUser,
+  readUser,
+  updateUser,
+  destroyUser
 }
