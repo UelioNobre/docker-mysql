@@ -1,8 +1,11 @@
 const Router = require('express')
 
 const router = Router()
-const loginController = require('../controllers/login.controller')
+const loginController = require('../controllers/login.controller');
+const loginMiddleware = require('../middlewares/login.middleware');
 
-router.post('/', loginController.signin)
+router.post('/',
+  loginMiddleware.validateRequestLogin,
+  loginController.signin)
 
 module.exports = router
