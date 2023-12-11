@@ -5,9 +5,13 @@
  * @param {import('express').NextFunction} next - Objeto de resposta do Express
  */
 function errorHandler(error, _req, res, next) {
-  console.log(error)
+
+  console.log('__________MiddlewarDeError__________');
+  console.log(error);
+  console.log('__________MiddlewarDeError__________');
+
   if (error.cause) {
-    const { code, message } = JSON.parse(error.cause)
+    const { code, message } = error.cause;
     return res.status(code).json({ message });
   }
 
