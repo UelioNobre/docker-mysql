@@ -32,7 +32,7 @@ const destroy = async (req, res) => {
   const { id } = req.user;
   await userService.destroyUser({ id })
 
-  return res.status(204).end()
+  return res.status(202).end()
 }
 
 module.exports = {
