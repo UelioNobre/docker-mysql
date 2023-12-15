@@ -19,15 +19,21 @@ const mockUser = [
 
 const mockAccount = [
   {
-    userId: mockUser[0].id,
+    user_id: mockUser[0].id,
     document: '987654321-20',
-    documentType: 'cpf',
+    document_type: 'cpf',
     status: true,
   },
   {
-    userId: mockUser[1].id,
+    user_id: mockUser[0].id,
+    document: '12.345.678/0001-90',
+    document_type: 'cnpj',
+    status: true,
+  },
+  {
+    user_id: mockUser[1].id,
     document: '123475789-10',
-    documentType: 'cpf',
+    document_type: 'cpf',
     status: true,
   }
 ]
