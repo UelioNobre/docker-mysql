@@ -1,4 +1,4 @@
-const { User } = require('../db/models/')
+const { User, Accounts } = require('../db/models/')
 const userErrorMessages = require('../utils/errors/user.error.messages')
 
 async function createNewUser({ name, email, password }) {
@@ -8,7 +8,22 @@ async function createNewUser({ name, email, password }) {
 
 async function readOneUser({ id }) {
   const attributes = ['id', 'name', 'email', 'createdAt'];
-  const result = await User.findByPk(id, { attributes });
+  const result = await User.findByPk(id, {
+    include: {
+      model: Accounts,
+      as: 'accounts', // O mesmo alias que você definiu na associação
+    }
+
+    /**
+{
+  model: Category,
+  as: 'categories',
+  attributes: ['id', 'name'],
+  through: { attributes: [] },
+}
+
+     */
+  });
 
   if (!result) userErrorMessages.notFound();
 
