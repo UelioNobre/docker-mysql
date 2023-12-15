@@ -10,18 +10,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       user_id: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      document: {
+        type: Sequelize.STRING(18),
+        allowNull: false,
+        unique: true,
+      },
+      document_type: {
+        type: Sequelize.STRING(4),
+        allowNull: false
       },
       status: {
-        type: Sequelize.STRING
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
       }
     });
   },
