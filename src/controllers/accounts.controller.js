@@ -1,16 +1,10 @@
 const { Accounts, User } = require('../db/models');
+const accountService = require('../services/account.service');
 
 async function listAllAccountsFromUser(req, res) {
-  const account = await Accounts.findAll({ where: { user_id: req.user.id } }, {
-    include: {
-      model: User,
-      as: 'user',
-      attributes: ['user_id'],
-      through: { attributes: [] },
-    }
-  });
-
-  return res.status(200).json(account);
+  const userId = req.user.id;
+  const { statusCode, message } = await accountService.listAllAccountsFromUser(userId);
+  return res.status(statusCode).json(message);
 }
 
 async function readAccountFromUser(req, res) {
@@ -43,7 +37,6 @@ async function deleteAccountFromUser(req, res) {
     { where: { id } }
   );
 
-  console.log('deleteAccountFromUser', typeof account, account, { id });
   if (account === 1) {
     return res.status(202).end();
   }
