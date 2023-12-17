@@ -17,7 +17,7 @@ class Validator {
     } catch (error) {
       throw new Error(error.message, {
         cause: {
-          code: 400,
+          statusCode: 400,
           message: error.message
         }
       });
