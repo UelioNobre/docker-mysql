@@ -14,11 +14,11 @@ class ValidateEmail extends Validation {
       .email({ minDomainSegments: 2 })
       .required()
       .messages({
-        'string.empty': `The ${this.property} does not empty.`,
-        'string.min': `The ${this.property} is very short.`,
-        'string.max': `The ${this.property} is very long.`,
-        'string.email': `Enter a valid ${this.property} `,
-        'any.required': `Enter a ${this.property} .`,
+        'string.empty': `The ${this.property} does not empty`,
+        'string.min': `The ${this.property} is very short`,
+        'string.max': `The ${this.property} is very long`,
+        'string.email': `Enter a valid ${this.property}`,
+        'any.required': `Enter a ${this.property}`,
       });
   }
 };
