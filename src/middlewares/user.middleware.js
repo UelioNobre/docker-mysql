@@ -11,7 +11,7 @@ const {
  * @param {import('express').Response} res - Objeto de resposta do Express
  * @param {import('express').NextFunction} next - Objeto de resposta do Express
  */
-async function validateRequestCreateOrUpdate(req, res, next) {
+async function validateRequestCreateOrUpdate(req, _res, next) {
   const validator = new Validator(req.body);
   validator.addValidation(new ValidateEmail());
   validator.addValidation(new ValidatePassword());
