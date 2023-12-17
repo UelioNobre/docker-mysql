@@ -7,15 +7,18 @@ const development = {
   port: 3306,
   dialectOptions: {
     bigNumberStrings: true
-  }
+  },
+  logging: process.env.NODE_ENV !== 'development',
 };
 
 const test = {
-  ...development
+  ...development,
+  logging: process.env.NODE_ENV !== 'test',
 }
 
 const production = {
-  ...development
+  ...development,
+  logging: process.env.NODE_ENV !== 'production',
 }
 
 module.exports = {
