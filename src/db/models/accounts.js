@@ -1,33 +1,45 @@
-'use strict';
-
-const { Model } = require('sequelize');
+// src/db/models/accounts.js
+const { Model, DataTypes } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Accounts extends Model { }
+  class AccountModel extends Model { }
 
-  Accounts.init({
-    user_id: DataTypes.INTEGER,
-    document: DataTypes.STRING,
-    document_type: {
-      type: DataTypes.STRING,
-      validate: {
-        isIn: {
-          args: [['cnpj', 'cpf']],
-          msg: "Only CPF or CPNJ documents"
+  AccountModel.init(
+    {
+      user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      document: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      document_type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          isIn: {
+            args: [['cnpj', 'cpf']],
+            msg: "Only CPF or CPNJ documents",
+          },
         },
-      }
+      },
+      status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+      },
     },
-    status: DataTypes.BOOLEAN,
-  }, {
-    sequelize,
-    modelName: 'Accounts',
-    underscored: false,
-    timestamps: false
-  });
+    {
+      sequelize,
+      modelName: 'Accounts',
+      underscored: false,
+      timestamps: false,
+    }
+  );
 
-  Accounts.associate = ({ User }) => {
-    Accounts.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
-  }
+  AccountModel.associate = ({ User }) => {
+    AccountModel.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
+  };
 
-  return Accounts;
+  return AccountModel;
 };
