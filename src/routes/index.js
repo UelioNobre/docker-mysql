@@ -1,4 +1,4 @@
-const Router = require('express')
+const { Router } = require('express')
 const accountsRouter = require('./accounts.router')
 const cashbacksRouter = require('./cashbacks.router')
 const homeRouter = require('./home.router')

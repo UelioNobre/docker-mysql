@@ -14,7 +14,7 @@ afterEach(() => {
   sinon.restore();
 });
 
-describe('Account Model', () => {
+describe('Unit Tests Account Model', () => {
   it('deve um array vazio nenhuma conta seja encontrada', async () => {
     // Dados de exemplo para o teste
     const user_id = 1;
@@ -48,9 +48,3 @@ describe('Account Model', () => {
     expect(result).to.be.deep.equal(mocks.mockAccountListByUserTokenId);
   });
 });
-
-// Tratamento de Erros:
-// Garantir que mensagens de erro significativas e apropriadas sejam retornadas.
-// Testar o comportamento do serviço ao lidar com falhas, como falhas no banco de dados ou erros internos.
-// Testes de Validação Customizada:
-// Se houver validações personalizadas definidas no modelo, como a validação de documentos, certifique - se de testar essas validações.

@@ -1,5 +1,5 @@
-const Router = require('express')
-const { mockUser, mockCashbacks } = require('../../mocks/user.mock')
+const { Router } = require('express')
+const { mockCashbacks } = require('../../mocks/user.mock')
 
 const router = Router()
 
