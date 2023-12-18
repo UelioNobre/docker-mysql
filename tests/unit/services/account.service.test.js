@@ -14,8 +14,7 @@ afterEach(() => {
   sinon.restore();
 });
 
-describe('Account Service', () => {
-  // Listar
+describe('Unit Tests Account Service', () => {
   it('deve retornar umm lista de contas e statusCode 200 de um usuário', async () => {
     const mockUserId = 1;
     const mockPayload = mocks.mockAccountListByUserTokenId;
