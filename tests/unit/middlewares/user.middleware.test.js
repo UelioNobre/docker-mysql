@@ -14,9 +14,9 @@ afterEach(() => {
   sinon.restore();
 });
 
-describe.only("User middleware - validateRequestCreateOrUpdate", () => {
+describe("Unit Tests User Middleware", () => {
   describe('Valida a propriedade "email"', () => {
-    it('lança erro ao informar um e-mail com menor de 6 caracteres', async () => {
+    it('deve lançar um erro ao informar um e-mail com menor de 6 caracteres', async () => {
       const req = {
         body: {
           email: 'test@examplecom',
@@ -39,7 +39,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
       }
     });
 
-    it('lança erro ao informar um e-mail com maior de 30 caracteres', async () => {
+    it('deve lançar um erro ao informar um e-mail com maior de 30 caracteres', async () => {
       const req = {
         body: {
           email: 'test@example_example_example_example_example_example.com',
@@ -63,7 +63,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
     });
 
 
-    it('lança erro ao informar um e-mail vazio', async () => {
+    it('deve lançar um erro ao informar um e-mail vazio', async () => {
       const req = {
         body: {
           email: '',
@@ -86,7 +86,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
       }
     });
 
-    it('lança erro ao informar um e-mail inválido', async () => {
+    it('deve lançar um erro ao informar um e-mail inválido', async () => {
       const req = {
         body: {
           email: 'teste@example',
@@ -109,7 +109,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
       }
     });
 
-    it('lança erro se não informar a propriedade "email"', async () => {
+    it('deve lançar um erro se não informar a propriedade "email"', async () => {
       const req = {
         body: {
           password: 'securePassword',
@@ -133,7 +133,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
   });
 
   describe('Valida a propriedade "password"', () => {
-    it('lança erro ao informar um password muito curto', async () => {
+    it('deve lançar um erro ao informar um password muito curto', async () => {
       const req = {
         body: {
           email: 'test@example.com',
@@ -156,7 +156,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
       }
     });
 
-    it('lança erro ao informar um password muito longo', async () => {
+    it('deve lançar um erro ao informar um password muito longo', async () => {
       const req = {
         body: {
           email: 'test@example.com',
@@ -179,7 +179,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
       }
     });
 
-    it('lança erro ao informar um password vazio', async () => {
+    it('deve lançar um erro ao informar um password vazio', async () => {
       const req = {
         body: {
           email: 'test@example.com',
@@ -202,7 +202,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
       }
     });
 
-    it('lança erro ao informar um password inválido', async () => {
+    it('deve lançar um erro ao informar um password inválido', async () => {
       const req = {
         body: {
           email: 'test@examplecom',
@@ -225,7 +225,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
       }
     });
 
-    it('lança erro não informar um a propriedade password', async () => {
+    it('deve lançar um erro não informar um a propriedade password', async () => {
       const req = {
         body: {
           email: 'test@example.com',
@@ -249,7 +249,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
   });
 
   describe('Valida a propriedade "name"', () => {
-    it('lança erro ao informar um name muito curto', async () => {
+    it('deve lançar um erro ao informar um name muito curto', async () => {
       const req = {
         body: {
           email: 'test@example.com',
@@ -272,7 +272,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
       }
     });
 
-    it('lança erro ao informar um name muito longo', async () => {
+    it('deve lançar um erro ao informar um name muito longo', async () => {
       const req = {
         body: {
           email: 'test@example.com',
@@ -295,7 +295,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
       }
     });
 
-    it('lança erro se não informar a propriedade name', async () => {
+    it('deve lançar um erro se não informar a propriedade name', async () => {
       const req = {
         body: {
           email: 'test@example.com',
@@ -317,7 +317,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
       }
     });
 
-    it('lança erro se informar a propriedade name vazia', async () => {
+    it('deve lançar um erro se informar a propriedade name vazia', async () => {
       const req = {
         body: {
           email: 'test@example.com',
@@ -342,7 +342,7 @@ describe.only("User middleware - validateRequestCreateOrUpdate", () => {
   });
 
   describe('Ao informar as propriedades name, email e password corretamente', () => {
-    it('Deve passar pela validação ao informar os dados de email, password e name corretamente.', async () => {
+    it('deve passar pela validação ao informar os dados de email, password e name corretamente.', async () => {
       const req = {
         body: {
           email: 'test@example.com',
