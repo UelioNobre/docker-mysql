@@ -14,7 +14,7 @@ afterEach(() => {
   sinon.restore();
 });
 
-describe('Accounts controllers', () => {
+describe('Unit Tests Accounts controllers', () => {
 
   describe('listAllAccountsFromUser', () => {
     it('deve retornar todas as contas de um usuário com sucesso', async () => {
